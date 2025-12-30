@@ -1,0 +1,26 @@
+<div class="main-container">
+  <img [src]="getBackground()" class="bg-image" alt="background">
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="search-box">
+      <h1>Clima em Tempo Real</h1>
+      <input type="text" [(ngModel)]="city" placeholder="Digite a cidade..." (keyup.enter)="buscarClima()">
+      <button (click)="buscarClima()">Pesquisar</button>
+    </div>
+
+    <div *ngIf="weatherData" class="weather-card">
+      <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+      <div class="temp-box">
+        <img [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@4x.png'">
+        <span class="temp">{{ weatherData.main.temp | number:'1.0-0' }}°C</span>
+      </div>
+      <p class="desc">{{ weatherData.weather[0].description | titlecase }}</p>
+      <div class="info-footer">
+        <p>Umidade: {{ weatherData.main.humidity }}%</p>
+        <p>Vento: {{ weatherData.wind.speed }} km/h</p>
+      </div>
+    </div>
+  </div>
+</div>
